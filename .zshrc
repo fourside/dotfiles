@@ -20,7 +20,7 @@ setopt auto_pushd
 
 # command correct edition before each completion attempt
 #
-setopt correct
+#setopt correct
 
 # compacked complete list display
 #
