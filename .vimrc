@@ -31,7 +31,8 @@ set nohlsearch
 " ステータスラインを常に表示
 set laststatus=2
 " ステータスラインに各種情報の表示
-set statusline=%F%m%r%h%w\ [FENC=%{&fenc!=''?&fenc:&enc}]\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"set statusline=%F%m%r%h%w\ [FENC=%{&fenc!=''?&fenc:&enc}]\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+set statusline=%F%m%r%h%w\ [%{&fenc!=''?&fenc:&enc}][%{&ff}][%Y]\ [%04l,%04v][%p%%][%Ll]
 hi StatusLine term=bold cterm=NONE ctermfg=black ctermbg=white
 
 syntax on
@@ -364,4 +365,6 @@ if has("autocmd")
 		\ endif
 	augroup END	
 endif
+
+
 
