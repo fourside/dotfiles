@@ -1,6 +1,7 @@
 alias s='screen'
 alias sr='screen -r'
 alias sx='screen -x'
+alias diff='diff -u'
 
 alias ls='ls --color=auto'
 alias ll='ls -l --color=auto'
