@@ -5,6 +5,7 @@ set nocompatible	"vim
 " .swpファイルの場所指定
 "set directory & directory+=$VIM/tmp
 set directory & directory=/tmp
+set tags+=$HOME/.tags
 let g:myvimruntime='$HOME/.vim/'
 " autocmd初期化
 augroup My
@@ -365,6 +366,7 @@ if has("autocmd")
 		\ endif
 	augroup END	
 endif
+
 
 
 
