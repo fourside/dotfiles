@@ -15,6 +15,7 @@ vbell off
 #hardstatus alwayslastline "[%02c] %`%-w%{=b bw}%n %t%{-}%+w"
 #hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %100=%-8=%c:%s"
 caption always "%`%-w%{=b rw}%n %t%{-}%+w %100=%-18=%y/%m/%d %c:%s"
+#sorendition "+rb .W"
 
 bind n screen 1
 bind h prev
