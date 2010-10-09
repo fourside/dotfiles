@@ -1,11 +1,22 @@
 alias s='screen'
 alias sr='screen -r'
+alias sx='screen -x'
+
+alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias l.='ls -a --color=auto'
+alias ll.='ls -al --color=auto'
+
 alias -g G='|grep '
 alias -g L='|less '
 alias -g T='|tee tee.log |less'
 alias -g W='|wc'
-EDITOR='vim'
-export EDITOR
+alias -g V='| vim -'
+alias rm='mv -f --backup=numbered --target-directory=~/.Trash'
+
+export EDITOR='vim'
+export PAGER='less'
+export PATH=$PATH:"$HOME/bin"
 
 autoload -U compinit
 compinit
@@ -30,6 +41,8 @@ setopt list_packed
 #
 setopt nolistbeep
 
+autoload -Uz colors
+colors
 
 #autoload predict-on
 #predict-on
@@ -46,7 +59,6 @@ export LANG=ja_JP.UTF-8
 #
 case ${UID} in
 0)
-#PROMPT="%B%{[31m%}%/#%{[m%}%b "
 	PROMPT="%B%{[31m%}%/#%{[m%}%b "
     PROMPT2="%B%{[31m%}%_#%{[m%}%b "
     SPROMPT="%B%{[31m%}%r is correct? [n,y,a,e]:%{[m%}%b "
@@ -108,18 +120,14 @@ setopt magic_equal_subst
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
-setopt autopushd
-
-
 #bindkey "^[^[[C" forward-word
 #bindkey "^[^[[D" backward-word 
-
-
 
 #pidを得る
 # see http://memo.officebrook.net/20100123.html
 zstyle ':completion:*:processes' command 'ps x -o pidsargs'
 
-autoload -Uz colors
-colors
+#mysqlのプロンプト
+#http://subtech.g.hatena.ne.jp/secondlife/20100427/1272350109
+export MYSQL_PS1='([32m\u[00m@[33m\h[00m) [34m[\d][00m > '
 
