@@ -10,6 +10,8 @@ else
 endif
 set tags+=$HOME/.tags
 let g:myvimruntime='$HOME/.vim/'
+set runtimepath+=$HOME/src/git-vim
+
 " autocmd初期化
 augroup My
 au!
@@ -261,6 +263,21 @@ nmap <Leader>A :<C-u>Ref alc
 let g:ref_refe_cmd = 'refe2'
 nmap <Leader>R :<C-u>Ref refe 
 
+" git-vim
+let g:git_no_map_default = 1
+let g:git_command_edit = 'rightbelow vnew'
+nnoremap <Space>ga :<C-u>GitAdd<Enter>
+nnoremap <Space>gA :<C-u>GitAdd <cfile><Enter>
+nnoremap <Space>gc :<C-u>GitCommit -v<Enter>
+nnoremap <Space>gC :<C-u>GitCommit --amend<Enter>
+nnoremap <Space>gd :<C-u>GitDiff --cached<Enter>
+nnoremap <Space>gD :<C-u>GitDiff<Enter>
+nnoremap <Space>gs :<C-u>GitStatus<Enter>
+nnoremap <Space>gl :<C-u>GitLog<Enter>
+nnoremap <Space>gL :<C-u>GitLog -u \| head -10000<Enter>
+nnoremap <Space>gp :<C-u>Git push
+nnoremap <Space>gu :<C-u>Git unstage
+
 ""================================================================================
 " neocomplcache.vim
 " ./.vim/doc/neocomplcache.jax
@@ -382,5 +399,6 @@ if has('win32')
 	set shellredir=>\s\ 2>&1
 	set shellxquote=\"
 endif
+
 
 
