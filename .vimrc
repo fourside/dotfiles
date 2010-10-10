@@ -4,7 +4,12 @@ set nocompatible	"vim
 " パス
 " .swpファイルの場所指定
 "set directory & directory+=$VIM/tmp
-set directory & directory=/tmp
+if has('win32')
+	set directory=$HOME/tmp
+else	
+	set directory=/tmp
+endif
+"set directory & directory=/tmp
 set tags+=$HOME/.tags
 let g:myvimruntime='$HOME/.vim/'
 " autocmd初期化
