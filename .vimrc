@@ -149,6 +149,10 @@ vnoremap ( "zdi^V{<C-R>z}<ESC>
 vnoremap " "zdi^V{<C-R>z}<ESC>
 vnoremap ' "zdi^V{<C-R>z}<ESC>
 
+" append line of =/-
+nnoremap ,= 80i=<ESC>
+nnoremap ,- 80i-<ESC>
+
 "inoremap <ESC> <ESC>:setlocal imdisable<CR>
 
 " .vimrcの編集
