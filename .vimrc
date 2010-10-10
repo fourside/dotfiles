@@ -2,14 +2,12 @@
 set nocompatible	"vim
 "================================================================================
 " パス
-" .swpファイルの場所指定
-"set directory & directory+=$VIM/tmp
+" .swpファイルの場所
 if has('win32')
 	set directory=$HOME/tmp
 else	
 	set directory=/tmp
 endif
-"set directory & directory=/tmp
 set tags+=$HOME/.tags
 let g:myvimruntime='$HOME/.vim/'
 " autocmd初期化
@@ -376,6 +374,13 @@ if has("autocmd")
 	augroup END	
 endif
 
-
+" nyacusをシェルに設定
+if has('win32')
+	set shell=$HOME/tools/nyacus/nyacus.exe
+	set shellcmdflag=-e		" 非対話モード
+	set shellpipe=\|\ tee
+	set shellredir=>\s\ 2>&1
+	set shellxquote=\"
+endif
 
 
