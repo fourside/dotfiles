@@ -8,10 +8,12 @@
 	interactive = auto
 	grep = auto
 [alias]
-	;co = checkout
+	co = checkout
 	;ci = commit -a
 	st = status
 	;up = pull --rebase
+	unstage = reset HEAD --
+	last = log -1 HEAD
 	log-graph = log --graph --date=short --pretty=format:'%Cgreen%h %cd %Cblue%cn %Creset%s'
 	log-all = log --graph --all --color --pretty=format:'%x09%h %cn%x09%s %Cred%cd%Creset'
 [core]
