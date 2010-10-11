@@ -57,6 +57,8 @@ set scrolloff=5	"スクロール時の余白確保
 set history=50
 
 let g:mapleader=","	"<Leader>
+" 表示をツリー状に
+let g:netrw_liststyle=3
 
 "================================================================================
 " indent, tab
