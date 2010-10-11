@@ -9,8 +9,7 @@ else
 	set directory=/tmp
 endif
 set tags+=$HOME/.tags
-let g:myvimruntime='$HOME/.vim/'
-set runtimepath+=$HOME/src/git-vim
+set runtimepath+=$HOME/.vim-plugins/git-vim
 
 " autocmd初期化
 augroup My
@@ -159,6 +158,9 @@ nnoremap ,= 80i=<ESC>
 nnoremap ,- 80i-<ESC>
 
 "inoremap <ESC> <ESC>:setlocal imdisable<CR>
+"
+"hlsearchのトグル
+noremap <ESC><ESC> :<C-u>set nohlsearch!<CR>
 
 " .vimrcの編集
 nnoremap <Leader>e :<C-u>edit $MYVIMRC<CR>
@@ -182,8 +184,11 @@ nnoremap <Leader>u :<C-u>e ++enc=utf-8<CR>
 " カーソル位置の単語でヘルプを引く
 nnoremap <Space>h :<C-u>execute "h" expand("<cword>")<CR>
 " スペースを含むファイル名を正しく取得する
-set isfname+=32
+"set isfname+=32
 
+" quickfixを自動で開く
+" http://webtech-walker.com/archive/2009/09/29213156.html
+autocmd QuickFixCmdPost make,grep,grepadd,vimgrep if len(getqflist()) != 0 | copen | endif
 "================================================================================
 " plugins
 
@@ -199,7 +204,12 @@ augroup END
 " CD.vim example:// は適用しない
 " bufferの場所にカレントディレクトリを合わせる
 augroup My
-	autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+	autocmd BufEnter * 
+	\ if bufname("") =~ "^\.git/COMMIT_EDITMSG$" | 
+	\ 	|
+	\ elseif bufname("") !~ "^\[A-Za-z0-9\]*://" |
+	\ 	lcd %:p:h |
+	\ endif
 augroup END
 
 " zencoding.vim
@@ -211,8 +221,9 @@ nmap <Leader>y :YRShow<CR>
 
 " NERD_commenter
 " .vim/doc/NERD_commenter.txt
-" コメントのトグル
+"コメントのトグル
 nmap <Leader>d ,c<Space>
+vmap <Leader>d ,c<Space>
 "未対応ファイルタイプのエラーメッセージを表示しない
 let NERDShutUp=1
 
@@ -231,7 +242,7 @@ augroup END
 let g:fuf_splitPathMatching = ' '
 let g:fuf_patternSeparator = ' '
 let g:fuf_modesDisable = ['mrucmd']
-let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|\.howm$'
+let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|\.howm$|\.(gif|jpg|png)$'
 let g:fuf_mrufile_maxItem = 10000
 let g:fuf_enumeratingLimit = 20
 
@@ -399,6 +410,5 @@ if has('win32')
 	set shellredir=>\s\ 2>&1
 	set shellxquote=\"
 endif
-
 
 
