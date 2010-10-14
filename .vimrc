@@ -1,5 +1,6 @@
 "================================================================================
 set nocompatible	"vim
+call pathogen#runtime_append_all_bundles()
 "================================================================================
 " パス
 " .swpファイルの場所
@@ -9,7 +10,6 @@ else
 	set directory=/tmp
 endif
 set tags+=$HOME/.tags
-set runtimepath+=$HOME/.vim-plugins/git-vim
 
 " autocmd初期化
 augroup My
@@ -194,10 +194,6 @@ autocmd QuickFixCmdPost make,grep,grepadd,vimgrep if len(getqflist()) != 0 | cop
 "================================================================================
 " plugins
 
-"./.vim/doc/quickrun.jax
-"./.vim/doc/quicklaunch.jax
-"./.vim/doc/surround.txt
-
 " closetag.vimの自動読み込み / C-_で閉じタグ挿入
 augroup My
 	autocmd FileType html,xhtml,xml,xsl,jsp,erb source $HOME/.vim/macros/closetag.vim
@@ -216,13 +212,12 @@ augroup END
 
 " zencoding.vim
 " きかない
-"inoremap <C-y> <C-y>,
+"inoremap <Leader>i <C-y>,
 
 " YankRing.vim
 nmap <Leader>y :YRShow<CR>
 
 " NERD_commenter
-" .vim/doc/NERD_commenter.txt
 "コメントのトグル
 nmap <Leader>d ,c<Space>
 vmap <Leader>d ,c<Space>
@@ -230,7 +225,6 @@ vmap <Leader>d ,c<Space>
 let NERDShutUp=1
 
 " fuf.vim
-"./.vim/doc/fuf.jax
 "nnoremap <unique> <silent> <C-S> :FufBuffer!<CR>
 "nnoremap <unique> <silent> ef :FufFile!<CR>
 "nnoremap <silent> eff :FufFile!<CR>
@@ -248,14 +242,8 @@ let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|\.howm$|\.(gif|jpg|png)$'
 let g:fuf_mrufile_maxItem = 10000
 let g:fuf_enumeratingLimit = 20
 
-" css_color.vim
-" cssカラーコードの背景色にその色
-aug My
-	autocmd FileType css,html source $HOME/.vim/ftplugin/css.vim
-aug END
 
 " smartchr.vim
-"./.vim/doc/smartchr.txt
 "inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
 inoremap <expr> & smartchr#one_of('&', ' & ', ' && ')
 "inoremap <expr> | smartchr#one_of('|', ' | ', ' || ')
@@ -263,16 +251,13 @@ inoremap <expr> , smartchr#one_of(', ', ',')
 inoremap <expr> ? smartchr#one_of('?', '? ')
 
 " ref.vim
-" ./.vim/doc/ref.jax
 let g:ref_open = 'split'
 "let g:ref_cache_dir  =  s:plugin_info . 'ref'
 "let g:ref_phpmanual_path  =  $HOME . '/share/doc/php'
-"./.vim/doc/ref-alc.jax
 let g:ref_alc_start_linenumber  =  37
 let g:ref_alc_cmd = 'w3m -dump %s'
 nmap <Leader>a :<C-u>execute "Ref alc" expand("<cword>")<CR>
 nmap <Leader>A :<C-u>Ref alc 
-"./.vim/doc/ref-refe.jax
 let g:ref_refe_cmd = 'refe2'
 nmap <Leader>R :<C-u>Ref refe 
 
@@ -293,7 +278,6 @@ nnoremap <Space>gu :<C-u>Git unstage
 
 ""================================================================================
 " neocomplcache.vim
-" ./.vim/doc/neocomplcache.jax
 " 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -346,7 +330,7 @@ smap <C-g> <Plug>(neocomplcache_snippets_expand)
 if &encoding !=# 'utf-8'
   set encoding=japan
 endif
-set fileencoding=japan
+"set fileencoding=japan
 if has('iconv')
   let s:enc_euc = 'euc-jp'
   let s:enc_jis = 'iso-2022-jp'
@@ -412,5 +396,9 @@ if has('win32')
 	set shellredir=>\s\ 2>&1
 	set shellxquote=\"
 endif
+
+
+
+
 
 
