@@ -33,6 +33,13 @@ set wrapscan
 set nolist
 " 検索結果文字列のハイライトを有効にしない
 set nohlsearch
+
+
+set t_Co=256
+"colorscheme ap_dark8
+"colorscheme default
+colorscheme wombat256mod
+
 " ステータスラインを常に表示
 set laststatus=2
 " ステータスラインに各種情報の表示
@@ -93,6 +100,7 @@ set complete+=k
 set hidden
 " 外部のエディタで編集中のファイルが変更されたら自動で読み直す
 set autoread
+
 
 " set cursorline
 highlight CursorLine ctermbg=Black
