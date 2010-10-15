@@ -54,7 +54,7 @@ export LANG=ja_JP.UTF-8
 #
 case ${UID} in
 0)
-	PROMPT="%B%{[31m%}%/#%{[m%}%b "
+	PROMPT="%B%{[31m%}%n#%{[m%}%b "
     PROMPT2="%B%{[31m%}%_#%{[m%}%b "
     SPROMPT="%B%{[31m%}%r is correct? [n,y,a,e]:%{[m%}%b "
     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
