@@ -18,28 +18,24 @@ alias rm='mv -f --backup=numbered --target-directory=~/.Trash'
 export EDITOR='vim'
 export PAGER='less'
 export PATH=$PATH:"$HOME/bin"
+if [[ -s $HOME/.rvm/scripts/rvm ]]; then source $HOME/.rvm/scripts/rvm ; fi
 
 autoload -U compinit
 compinit
 
 # auto change directory
-#
 setopt auto_cd
 
 # auto directory pushd that you can get dirs list by cd -[tab]
-#
 setopt auto_pushd
 
 # command correct edition before each completion attempt
-#
 #setopt correct
 
 # compacked complete list display
-#
 setopt list_packed
 
 # no beep sound when complete list displayed
-#
 setopt nolistbeep
 
 autoload -Uz colors
@@ -49,13 +45,11 @@ colors
 #predict-on
 
 ## Environment variable configuration
-#
 # LANG
 #
 export LANG=ja_JP.UTF-8
 
 ## Default shell configuration
-#
 # set prompt
 #
 case ${UID} in
