@@ -126,3 +126,31 @@ zstyle ':completion:*:processes' command 'ps x -o pidsargs'
 #http://subtech.g.hatena.ne.jp/secondlife/20100427/1272350109
 export MYSQL_PS1='([32m\u[00m@[33m\h[00m) [34m[\d][00m > '
 
+#http://d.hatena.ne.jp/mollifier/20100906/p1
+#gitのブランチ名を表示
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' enable git svn hg bzr
+zstyle ':vcs_info:*' formats '(%s)-[%b]'
+zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
+zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
+zstyle ':vcs_info:bzr:*' use-simple true
+
+autoload -Uz is-at-least
+if is-at-least 4.3.10; then
+# この check-for-changes が今回の設定するところ
+	zstyle ':vcs_info:git:*' check-for-changes true
+	zstyle ':vcs_info:git:*' stagedstr "+"    # 適当な文字列に変更する
+	zstyle ':vcs_info:git:*' unstagedstr "-"  # 適当の文字列に変更する
+	zstyle ':vcs_info:git:*' formats '[%b]%c%u'
+	zstyle ':vcs_info:git:*' actionformats '[%b|%a]%c%u'
+fi
+
+function _update_vcs_info_msg() {
+	psvar=()
+	LANG=en_US.UTF-8 vcs_info
+	[[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+add-zsh-hook precmd _update_vcs_info_msg
+RPROMPT+="%1(v|%F{green}%1v%f|)"
