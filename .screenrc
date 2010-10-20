@@ -23,7 +23,7 @@ bind j next
 bind l windowlist
 bind k kill
 
-shell `which zsh`
+shell zsh
 
 screen -t zsh 1
 screen -t vim 2
