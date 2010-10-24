@@ -47,11 +47,12 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ [%{&fenc!=''?&fenc:&enc}][%{&ff}][%Y]\ [%04l,%04v][%p%%][%Ll]
 hi StatusLine term=bold cterm=NONE ctermfg=black ctermbg=white
 
+setlocal encoding=utf-8
+setlocal fileencoding=utf-8
+
 syntax on
 filetype plugin on		"オムニ補完
 
-setlocal encoding=utf-8
-setlocal fileencoding=utf-8
 " rails
 augroup My
 	au BufNewFile,BufRead app/**/*.rhtml set fenc=utf-8
