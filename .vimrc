@@ -190,6 +190,10 @@ augroup END
 " yeでそのカーソル位置にある単語をレジスタに追加
 nmap ye :let @"=expand("<cword>")<CR>
 
+"help
+nnoremap <C-i> :<C-u>help<Space>
+nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
+
 " utf-8で開き直す
 nnoremap <Leader>u :<C-u>e ++enc=utf-8<CR>
 " カーソル位置の単語でヘルプを引く
