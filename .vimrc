@@ -85,6 +85,7 @@ set noexpandtab	"タブをスペースに変換しない
 " rubyはタブ幅2
 augroup My
 	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=0
+	autocmd FileType ruby nnoremap i# coding : utf-8<Esc>
 augroup END
 
 " share clipboard with other applications
