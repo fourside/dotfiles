@@ -191,8 +191,8 @@ augroup END
 nmap ye :let @"=expand("<cword>")<CR>
 
 "help
-nnoremap <C-i> :<C-u>help<Space>
-nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
+"nnoremap <C-i> :<C-u>help<Space>
+"nnoremap <C-i><C-i> :<C-u>help<Space><C-r><C-w><Enter>
 
 " utf-8で開き直す
 nnoremap <Leader>u :<C-u>e ++enc=utf-8<CR>
@@ -409,9 +409,4 @@ if has('win32')
 	set shellredir=>\s\ 2>&1
 	set shellxquote=\"
 endif
-
-
-
-
-
 
