@@ -204,7 +204,10 @@ nnoremap <Space>h :<C-u>execute "h" expand("<cword>")<CR>
 
 " quickfixを自動で開く
 " http://webtech-walker.com/archive/2009/09/29213156.html
-autocmd QuickFixCmdPost make,grep,grepadd,vimgrep if len(getqflist()) != 0 | copen | endif
+augroup My
+	autocmd QuickFixCmdPost make,grep,grepadd,vimgrep if len(getqflist()) != 0 | copen | endif
+augroup END
+
 "================================================================================
 " plugins
 
@@ -352,6 +355,14 @@ function! s:open_junk_file()
 	endif
 endfunction"}}}
 
+function! RTrim()
+	let s:cursor = getpos(".")
+	%s/\s\+$//e
+	call setpos(".", s:cursor)
+endfunction
+augroup My
+	autocmd BufWritePre *.php, *.rb, *.js, *.bat call RTrim()
+augroup END
 "================================================================================
 " 文字コード
 
