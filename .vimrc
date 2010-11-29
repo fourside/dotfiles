@@ -361,7 +361,7 @@ function! RTrim()
 	call setpos(".", s:cursor)
 endfunction
 augroup My
-	autocmd BufWritePre *.php, *.rb, *.js, *.bat call RTrim()
+	autocmd BufWritePre *.php,*.rb,*.js,*.bat call RTrim()
 augroup END
 "================================================================================
 " 文字コード
