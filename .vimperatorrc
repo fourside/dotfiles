@@ -1,0 +1,329 @@
+" 基本設定
+" vim: set ft=vimperator:
+set titlestring=Firefox
+
+" beep off
+set visualbell
+highlight Bell display:none
+
+" ポップアップ許可数を拡張 cf.http://la.ma.la/blog/diary_200611171115.htm
+set! dom.popup_maximum=9999
+
+" ime off. http://vimperator.g.hatena.ne.jp/teramako/20090311/1236776437
+style -name commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+"" リンクをバックグランドで開く
+"set! browser.tabs.loadDivertedInBackground=true
+
+" リンクのURIの表示
+" 1 status line/ 2 command line
+"set showstatuslinks=1
+
+" コマンド名補完
+set wildoptions=auto
+
+"検索エンジンの補完機能
+set complete=sS
+
+" default 検索エンジン 検索バー管理のキーワードで指定
+set defsearch=g
+set suggestengines=g
+
+" url区切り文字を空文字にする
+" cf. http://vimperator.g.hatena.ne.jp/teramako/20091121/1258809606
+:set urlseparator=
+
+set guioptions=rb
+
+set nextpattern=\bnext\b,\bmore\b,next,^次(の)?ページ,\b次.*,→\b,^>$,^(>>|≫)$,^(>|≫),(>|≫)$
+set previouspattern=\bprev|previous\b,prev,^前(の)?ページ,\b前.*,\b←,^<$,^(<<|≪)$,^(<|≪),(<|≪)$
+
+" mappings
+" ======================================================================
+
+" j/k scroll量を増やす
+map j 5<C-e>
+map k 5<C-y>
+map J <C-d>
+map K <C-u>
+
+map <C-S-l> <Left>
+map <C-S-h> <Right>
+
+map <C-h> <BS>
+
+"tab移動
+nnoremap l <C-n>
+nnoremap h <C-p>
+
+"<BS>で戻る
+nnoremap <BS> H
+
+" タブ閉じで直前開いていたタブに戻る
+nnoremap d <C-w>
+nnoremap . <C-w>
+
+"!でCSS無効
+nnoremap ! :set invum<CR>
+
+" 補完リストの選択をC-n,C-pで
+cmap <C-j> <TAB>
+cmap <C-k> <S-TAB>
+
+" コマンド履歴
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+
+" shell likeにする
+cmap <C-a> <HOME>
+cmap <C-e> <END>
+cmap <C-b> <LEFT>
+cmap <C-f> <RIGHT>
+cmap <C-l> <RIGHT>
+cmap <C-u> <END><S-HOME><BS>
+cmap <C-d> <DEL>
+
+inoremap <C-a> <HOME>
+inoremap <C-e> <END>
+inoremap <C-b> <LEFT>
+inoremap <C-f> <RIGHT>
+inoremap <C-l> <RIGHT>
+inoremap <C-u> <END><S-HOME><C-x>
+inoremap <C-y> <C-v>
+inoremap <C-p> <C-v>
+inoremap <C-h> <BS>
+
+"inoremap <C-p> <UP>
+"inoremap <C-n> <DOWN>
+inoremap <C-j> <DOWN>
+inoremap <C-k> <UP>
+
+"C-cでEsc
+map <C-c> <Esc>
+" Stop loading
+noremap <Esc> :stop<CR>
+
+" タブ順序変更
+noremap <A-C-h> :tabmove! -1<CR>
+noremap <A-C-l> :tabmove! +1<CR>
+
+" ページのエンコーディングを変更
+noremap ,es :set encoding=Shift_JIS<CR>
+noremap ,ec :set encoding=EUC-JP<CR>
+noremap ,eu :set encoding=UTF-8<CR>
+noremap ,ei :set encodeing=ISO-2022-JP<CR>
+
+" undo一覧から開く
+noremap U :undo<Space>
+
+" 検索ページに飛ばさない
+nnoremap <C-k> <Nop>
+
+" コマンドライン、テキストエリア内では<C-v>で貼り付け
+cnoremap <C-v> <C-v><C-v>
+inoremap <C-v> <C-v><C-v>
+
+" GUI
+noremap <C-1> :set go=rb<CR>
+noremap <C-2> :set go=rbm<CR>
+noremap <C-3> :set go=rbT<CR>
+noremap <C-4> :set go=rbmT<CR>
+
+" キャレットブラウズからヴィジュアルモードで単語選択してからPでウェブ検索
+vmap <s-p> y<Esc><Esc>P
+
+nnoremap <s-A> :tabopen alc<space>
+nnoremap <s-M> :tabopen maps<space>
+
+" qmarks
+qmark a http://tokyo-ame.jwa.or.jp/
+qmark c http://calil.jp/
+qmark C http://www.choistudy.jp/
+qmark e http://b.hatena.ne.jp/entrylist
+qmark E http://ekitan.com/
+qmark j http://traininfo.jreast.co.jp/train_info/kanto.aspx
+qmark v https://github.com/vimpr/vimperator-plugins
+qmark w http://weather.goo.ne.jp/area/4410.html
+qmark W http://weathernews.jp/
+
+
+" abbreviate
+ab deb http://debian
+ab tv http://tv.goo.ne.jp/index.html
+ab am amazon
+nnoremap ,T :tabopen tv<space><CR>
+
+" dialog
+nnoremap ,l :dialog livehttpheaders<CR>
+nnoremap ,a :dialog addons<CR>
+
+
+
+let g:plugin_loader_roots = "~/vimperator-plugins/"
+let g:plugin_loader_plugins = "_libly,auto-focus-frame,direct_bookmark,edit-vimperator-files,feedSomeKeys_2,gmperator,ldrize_cooperation,maine_coon,migemo-find,migemo_hint,migratestatusbar,no-reading,opener,stella,twittperator,walk-input"
+
+
+" addonなどとの連携
+"================================================================================
+
+" Tumblr DashboardでAutoPagerizeのBASE_REMAIN_HEIGHTを変更
+autocmd VimperatorEnter .* :autocmd GMInjectedScript "www\\.tumblr\\.com/dashboard" :js liberator.eval("ap.remainHeight = 10000", plugins.gmperator.currentSandbox.window.AutoPagerize.addFilter)
+
+" post feed in LDR to tumblr
+noremap T :tomblooReader ReBlog\ -\ LDR<CR>
+
+" hueristic search using yahoo api, hsearch.js
+" cf.http://d.hatena.ne.jp/hitode909/20100214/1266129415
+map ` :hsearch<Space><tab>
+
+" readability
+map ,r :js Readability.enableREADABILITY({target: {id: 'readability-statusbar-icon'}})<CR>
+
+" feeling lucky
+" http://www.google.co.jp/search?btnI=I%27m+Feeling+Lucky&q=%s
+noremap <C-o> :open fl<space>
+noremap <C-t> :tabopen fl<space>
+
+" google maps
+noremap <C-m> :tabopen maps 
+
+
+" plugins
+" ======================================================================
+
+"はてなブックマーク(cf.http://d.hatena.ne.jp/ir5/20090711/1247265605)
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+
+" no-reading.js
+let g:no_reading_do_echo = 1
+
+" ldrize_cooperation.js
+let g:ldrc_captureMappings = "['j','k','p','o','?','t']"
+"let g:ldrc_intelligence_bind = "true"
+"let g:ldrc_skip = "0"
+noremap <silent> Q :toggleldrc<CR>
+
+" migemo_hint.js
+set hintmatching=custom
+
+" noscript.js
+noremap <S-n> :noscript popup<CR>
+
+"feedSomeKeys_2.js
+autocmd LocationChange .* :fmapc
+autocmd LocationChange ^http://fastladder\\.com/reader/$ :fmap j k s a p,pj o,O v,vj c r w <Space> <S-Space>
+autocmd LocationChange ^http://b\\.hatena\\.ne\\.jp/(entrylist|hotentry|t/|keyword/) :fmap j k o,oj e,ej p
+"autocmd LocationChange ^http://b\\.hatena\\.ne\\.jp/* :fmap j k o,oj e,ej p
+autocmd LocationChange ^http://.*?\\.tumblr\\.com/(dashboard|tumblelog)? :fmap j k p o T,t L,l
+autocmd LocationChange ^http://www\\.choistudy\\.jp/* :fmap n
+autocmd LocationChange ^http://www.google.* :fmap j k o p
+autocmd LocationChange ^http://twitter\\.com/* :fmap j k n gh /
+
+source ./.vimperatorrc.my
+
+" direct_bookmark.js
+let g:direct_sbm_use_services_by_tag = "h"
+let g:direct_sbm_use_services_by_post = "h"
+let g:direct_sbm_is_normalize = "false"
+let g:direct_sbm_use_migemo = "true"
+noremap E :bentry<CR>
+
+" twitter.js
+noremap ,t :twitter<CR>
+
+" タブ追加アイコンの非表示
+style chrome://* .tabs-newtab-button { display:none;}
+
+" color scheme
+" ======================================================================
+colorscheme bigchutemp
+
+" http://vimperator.g.hatena.ne.jp/hogelog/20081213/1229199895
+javascript <<EOM
+[
+    ['scrapbook', 'ScrapBook', 'chrome://scrapbook/content/scrapbook.xul', 'resizable,width=300,height=700'],
+    ['livehttpheaders', 'Live HTTP Headers', 'chrome://livehttpheaders/content/LiveHTTPHeaders.xul'],
+].forEach(function([name, description, uri, args]) config.dialogs.push([name, description, function() openDialog(uri, "_blank", args)]));
+EOM
+
+
+" stella
+
+javascript <<EOM
+function addLocalMappings(buffer, maps) {
+  maps.forEach(
+    function (map) {
+      let [cmd, action, extra] = map;
+      let actionFunc = action;
+      extra || (extra = {});
+
+      if (typeof action == "string") {
+        if (action.charAt(0) == ':')
+          actionFunc = extra.open ? function () commandline.open("", action, modes.EX)
+                                  : function () liberator.execute(action);
+        else
+          actionFunc = function () events.feedkeys(action, extra.noremap, true);
+      }
+      extra.matchingUrls = buffer;
+      mappings.addUserMap(
+        [modes.NORMAL],
+        [cmd],
+        "Local mapping for " + buffer,
+        actionFunc,
+        extra
+      );
+    }
+  );
+}
+addLocalMappings(
+  /^(http:\/\/(es|www).nicovideo.jp\/watch|http:\/\/(jp|www)\.youtube\.com\/watch|http:\/\/(www\.)?vimeo\.com\/(channels\/(hd)?#)?\d+)/,
+  [
+    ['<C-g>', ':pageinfo S', ],
+    ['p', ':stplay', ],
+    ['m', ':stmute', ],
+    ['zz', ':stlarge', ],
+    ['r', ':strepeat', ],
+    ['+', ':stvolume! 10', ],
+    ['-', ':stvolume! -10', ],
+    ['K', ':stvolume! 10', ],
+    ['J', ':stvolume! -10', ],
+    ['s', ':stseek ', {open: true}],
+    ['S', ':stseek! ', {open: true}],
+    ['v', ':stvolume ', {open: true}],
+    ['V', ':stvolume! ', {open: true}],
+  ]
+);
+
+EOM
+
+" AutoPagerizeのトグル
+js << EOM
+    let evaluateXPath = util.evaluateXPath || buffer.evaluateXPath;
+    mappings.addUserMap(
+      [modes.NORMAL],
+      ['^'],
+      'Toggle AutoPagerize',
+      function (motion, count, arg) {
+        buffer.followLink(
+          evaluateXPath('id("autopagerize_help")/div/a[@class="autopagerize_link"]').snapshotItem(0)
+        );
+      },
+      {}
+    );
+EOM
+
+nnoremap ,s :so ~/_vimperatorrc<CR>
+" OSの判定
+"js << EOM
+"if (liberator.has("Win32")) {
+	""nnoremap ,e :edit ~/_vimperatorrc<CR>
+	""liberator.execute("nnoremap ,s :so ~/_vimperatorrc<CR>");
+"} else { //unix
+	""set runtimepath=~/.vimperator
+	""nnoremap ,s :so ~/.vimperatorrc<CR>
+	"""nnoremap ,e :edit ~/.vimperatorrc<CR>
+	"""set showtabline=0
+	""set editor=vim
+"}
+"EOM
+
