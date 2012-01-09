@@ -187,6 +187,7 @@ nnoremap <Leader>s :<C-u>source $MYVIMRC<CR>
 augroup My
 	autocmd FileType perl :nnoremap <C-n> <ESC>:!perl -cw %<CR>
 	autocmd FileType ruby :nnoremap <C-n> <ESC>:!ruby -cW %<CR>
+	autocmd FileType php  :nnoremap <C-n> <ESC>:!php  -l  %<CR>
 	autocmd FileType ruby :nnoremap <C-m> <ESC>:!ruby -Ku %<CR>
 augroup END
 
