@@ -57,6 +57,8 @@ filetype plugin on		"オムニ補完
 augroup My
 	au BufNewFile,BufRead app/**/*.rhtml set fenc=utf-8
 	au BufNewFile,BufRead app/**/*.rb set fenc=utf-8
+	autocmd BufWrite,BufNewFile *_spec.rb set filetype=ruby.rspec
+	autocmd BufWrite,BufNewFile test_*.rb set filetype=ruby.test
 augroup END
 
 set ruler	"ルーラー表示
@@ -293,6 +295,14 @@ nnoremap <Space>gL :<C-u>GitLog -u \| head -10000<Enter>
 nnoremap <Space>gp :<C-u>Git push
 nnoremap <Space>gu :<C-u>Git unstage
 
+" quickrun
+"augroup My
+	"autocmd BufWrite,BufNewFile *_spec.rb set filetype=ruby.rspec
+	"autocmd BufWrite,BufNewFile test_*.rb set filetype=ruby.test
+"augroup END
+let g:quickrun_config = {}
+let g:quickrun_config['ruby.test'] = {'command': "rake"}
+let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
 ""================================================================================
 " neocomplcache.vim
 " 
