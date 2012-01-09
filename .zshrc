@@ -18,7 +18,8 @@ alias rm='mv -f --backup=numbered --target-directory=~/.Trash'
 export EDITOR='vim'
 export PAGER='less'
 export PATH=$PATH:"$HOME/bin"
-if [[ -s $HOME/.rvm/scripts/rvm ]]; then source $HOME/.rvm/scripts/rvm ; fi
+export HEROKU_SSL_VERIFY='disable'
+#if [[ -s $HOME/.rvm/scripts/rvm ]]; then source $HOME/.rvm/scripts/rvm ; fi
 
 autoload -U compinit
 compinit
