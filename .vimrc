@@ -269,6 +269,7 @@ inoremap <expr> & smartchr#one_of('&', ' & ', ' && ')
 "inoremap <expr> | smartchr#one_of('|', ' | ', ' || ')
 inoremap <expr> , smartchr#one_of(', ', ',')
 inoremap <expr> ? smartchr#one_of('?', '? ')
+inoremap <expr> { smartchr#loop('{', '#{', '{{{')
 
 " ref.vim
 let g:ref_open = 'split'
