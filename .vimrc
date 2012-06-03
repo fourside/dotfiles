@@ -323,32 +323,17 @@ source $HOME/.gist.vim
 " functions
 
 " html escape function
-:function! HtmlEscape() 
+function! HtmlEscape() 
     silent s/&/\&amp;/eg 
     silent s/</\&lt;/eg 
     silent s/>/\&gt;/eg 
-:endfunction 
+endfunction 
 
-:function! HtmlUnEscape() 
+function! HtmlUnEscape() 
     silent s/&lt;/</eg 
     silent s/&gt;/>/eg 
     silent s/&amp;/\&/eg 
-:endfunction 
-
-
-" Open junk file."{{{
-command! -nargs=0 JunkFile call s:open_junk_file()
-function! s:open_junk_file()
-    let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
-    if !isdirectory(l:junk_dir)
-        call mkdir(l:junk_dir, 'p')
-    endif
-
-    let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
-    if l:filename != ''
-        execute 'edit ' . l:filename
-    endif
-endfunction"}}}
+endfunction 
 
 function! RTrim()
     let s:cursor = getpos(".")
@@ -412,7 +397,6 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
-
 " 前回のカーソル位置を記憶"
 if has("autocmd")
     augroup My
@@ -421,13 +405,4 @@ if has("autocmd")
         \   exe "normal! g'\"" |
         \ endif
     augroup END 
-endif
-
-" nyacusをシェルに設定
-if has('win32')
-    set shell=$HOME/tools/nyacus/nyacus.exe
-    set shellcmdflag=-e     " 非対話モード
-    set shellpipe=\|\ tee
-    set shellredir=>\s\ 2>&1
-    set shellxquote=\"
 endif
