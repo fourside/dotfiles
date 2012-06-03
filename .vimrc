@@ -51,14 +51,6 @@ setlocal fileencoding=utf-8
 syntax on
 filetype plugin on      "オムニ補完
 
-" rails
-augroup My
-    au BufNewFile,BufRead app/**/*.rhtml set fenc=utf-8
-    au BufNewFile,BufRead app/**/*.rb set fenc=utf-8
-    autocmd BufWrite,BufNewFile *_spec.rb set filetype=ruby.rspec
-    autocmd BufWrite,BufNewFile test_*.rb set filetype=ruby.test
-augroup END
-
 set ruler   "ルーラー表示
 set showmode    "モード表示
 set scrolloff=5 "スクロール時の余白確保
@@ -82,11 +74,6 @@ set shiftwidth=4
 " 0のとき、tabstopの分だけ挿入される
 set softtabstop=0
 set expandtab   "タブをスペースに変換
-" rubyはタブ幅2
-augroup My
-    autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=0
-    autocmd FileType ruby nnoremap i# coding : utf-8<Esc>
-augroup END
 
 " share clipboard with other applications
 set clipboard=unnamed
@@ -102,7 +89,6 @@ set complete+=k
 set hidden
 " 外部のエディタで編集中のファイルが変更されたら自動で読み直す
 set autoread
-
 
 " set cursorline
 highlight CursorLine ctermbg=Black
@@ -216,22 +202,40 @@ nnoremap <Space>h :<C-u>execute "h" expand("<cword>")<CR>
 " スペースを含むファイル名を正しく取得する
 "set isfname+=32
 
+augroup My
+" rubyはタブ幅2
+    autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=0
+    autocmd FileType ruby nnoremap i# encoding : utf-8<Esc>
+" rails
+    autocmd BufNewFile,BufRead app/**/*.rhtml setlocal fenc=utf-8
+    autocmd BufNewFile,BufRead app/**/*.rb setlocal fenc=utf-8
+"testファイルの場合filetype変更
+    autocmd BufWinEnter,BufNewFile *_spec.rb setlocal filetype=ruby.rspec
+    autocmd BufWinEnter,BufNewFile test_*.rb setlocal filetype=ruby.test
+    autocmd BufWinEnter,BufNewFile *Test.php setlocal filetype=php.unit
 " quickfixを自動で開く
 " http://webtech-walker.com/archive/2009/09/29213156.html
-augroup My
-    autocmd QuickFixCmdPost make,grep,grepadd,vimgrep if len(getqflist()) != 0 | copen | endif
-augroup END
-
-"================================================================================
-" plugins
-
+    autocmd QuickFixCmdPost grep,grepadd,vimgrep if len(getqflist()) != 0 | copen | endif
 " bufferの場所にカレントディレクトリを合わせる
-augroup My
     autocmd BufEnter * 
     \ if bufname("") !~? "^\.git/COMMIT_EDITMSG$" && bufname("") !~? "^\[A-Za-z0-9\]*://" |
     \   lcd %:p:h |
     \ endif
+
+    if has('gui')
+        autocmd FocusGained * set transparency=220
+        autocmd FocusLost   * set transparency=100
+        nnoremap <silent> <C-q> :call <SID>ToggleTransparency()<CR>
+        function! s:ToggleTransparency()
+            let &transparency = &transparency > 80 ? 80 : 220
+        endfunction
+    endif
+" htmlをブラウザで開く
+    autocmd FileType html,xhtml nnoremap <Leader>W :silent ! start firefox %<CR>
 augroup END
+
+"================================================================================
+" plugins
 
 " zencoding.vim
 " きかない
