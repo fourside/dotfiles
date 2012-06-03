@@ -225,12 +225,6 @@ augroup END
 "================================================================================
 " plugins
 
-" closetag.vimの自動読み込み / C-_で閉じタグ挿入
-augroup My
-    autocmd FileType html,xhtml,xml,xsl,jsp,erb source $HOME/.vim/macros/closetag.vim
-augroup END
-
-" CD.vim example:// は適用しない
 " bufferの場所にカレントディレクトリを合わせる
 augroup My
     autocmd BufEnter * 
@@ -254,25 +248,6 @@ nmap <Leader>d ,c<Space>
 vmap <Leader>d ,c<Space>
 "未対応ファイルタイプのエラーメッセージを表示しない
 let NERDShutUp=1
-
-" fuf.vim
-"nnoremap <unique> <silent> <C-S> :FufBuffer!<CR>
-"nnoremap <unique> <silent> ef :FufFile!<CR>
-"nnoremap <silent> eff :FufFile!<CR>
-nnoremap <silent> fb :FufBuffer!<CR>
-nnoremap <silent> ff :FufFile!<CR>
-nnoremap <silent> gb :FufFile **/<CR>
-nnoremap <silent> mf :FufMruFile!<CR>
-augroup My
-    autocmd FileType fuf nmap <C-c> <ESC>
-augroup END
-let g:fuf_splitPathMatching = ' '
-let g:fuf_patternSeparator = ' '
-let g:fuf_modesDisable = ['mrucmd']
-let g:fuf_mrufile_exclude = '\v\~$|\.bak$|\.swp|\.howm$|\.(gif|jpg|png)$'
-let g:fuf_mrufile_maxItem = 10000
-let g:fuf_enumeratingLimit = 20
-
 
 " smartchr.vim
 "inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
