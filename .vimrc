@@ -56,7 +56,6 @@ set showmode    "モード表示
 set scrolloff=5 "スクロール時の余白確保
 set history=50
 
-let g:mapleader="," "<Leader>
 " 表示をツリー状に
 let g:netrw_liststyle=3
 
@@ -90,9 +89,10 @@ set hidden
 " 外部のエディタで編集中のファイルが変更されたら自動で読み直す
 set autoread
 
-" set cursorline
-highlight CursorLine ctermbg=Black
-highlight CursorLine ctermfg=Blue
+"listcharsがカーソル行で文字色が白くなってlistcharsぽく見えない
+set cursorline
+highlight CursorLineNr term=bold ctermfg=Black gui=bold guifg=Black guibg=#444444
+"highlight CursorLine ctermbg=Black
 
 " 補完候補の色づけ for vim7
 hi Pmenu ctermbg=Black
@@ -104,9 +104,13 @@ hi PmenuSbar ctermbg=Black
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guifg=#226666
 match ZenkakuSpace /　/
 
+" その他
+set nrformats=hex,alpha     " 8進数をインクリメントしない。
+set foldmethod=marker       " 折りたたみ
 "================================================================================
 " key mappings
 
+let g:mapleader=",""<Leader>
 " jkを物理的行移動に。
 nnoremap j gj
 nnoremap k gk
