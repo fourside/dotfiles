@@ -243,23 +243,21 @@ augroup END
 
 " YankRing.vim
 nmap <Leader>y :YRShow<CR>
-
-" NERD_commenter
+" NERD_commenter {{{
 "コメントのトグル
 nmap <Leader>d ,c<Space>
 vmap <Leader>d ,c<Space>
 "未対応ファイルタイプのエラーメッセージを表示しない
 let NERDShutUp=1
-
-" smartchr.vim
+"}}}
+" smartchr.vim 
 "inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
 inoremap <expr> & smartchr#one_of('&', ' & ', ' && ')
 "inoremap <expr> | smartchr#one_of('|', ' | ', ' || ')
 inoremap <expr> , smartchr#one_of(', ', ',')
 inoremap <expr> ? smartchr#one_of('?', '? ')
 inoremap <expr> { smartchr#loop('{', '#{', '{{{')
-
-" ref.vim
+" ref.vim {{{
 let g:ref_open = 'split'
 "let g:ref_cache_dir  =  s:plugin_info . 'ref'
 "let g:ref_phpmanual_path  =  $HOME . '/share/doc/php'
@@ -269,8 +267,8 @@ nmap <Leader>a :<C-u>execute "Ref alc" expand("<cword>")<CR>
 nmap <Leader>A :<C-u>Ref alc 
 let g:ref_refe_cmd = 'refe2'
 nmap <Leader>R :<C-u>Ref refe 
-
-" git-vim
+"}}}
+" git-vim {{{
 let g:git_no_map_default = 1
 let g:git_command_edit = 'rightbelow vnew'
 nnoremap <Space>ga :<C-u>GitAdd<Enter>
@@ -284,15 +282,15 @@ nnoremap <Space>gl :<C-u>GitLog<Enter>
 nnoremap <Space>gL :<C-u>GitLog -u \| head -10000<Enter>
 nnoremap <Space>gp :<C-u>Git push
 nnoremap <Space>gu :<C-u>Git unstage
-
-
+"}}}
+" quickrun {{{
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.test'] = {'command': "rake"}
 let g:quickrun_config['ruby.rspec'] = {'command': "rspec", 'cmdopt': '-fs --color'}
 let g:quickrun_config['markdown'] = {'command': "bluecloth", 'exec': '%c %s'}
-""================================================================================
-" neocomplcache.vim
-" 
+let g:quickrun_config['php.unit'] = {'command': "phpunit"}
+"}}}
+" neocomplcache.vim {{{
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
@@ -306,23 +304,21 @@ let g:neocomplcache_enable_underbar_completion = 1
 " Set minimum syntax keyword length.
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
 " Define dictionary.
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : ''}
-
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
     let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
 " Plugin key-mappings.
 imap <C-g> <Plug>(neocomplcache_snippets_expand)
 smap <C-g> <Plug>(neocomplcache_snippets_expand)
-
-" gist.vim
+"}}}
+" gist.vim {{{
 source $HOME/.gist.vim
+"}}}
 ""================================================================================
 " functions
 
@@ -332,7 +328,6 @@ function! HtmlEscape()
     silent s/</\&lt;/eg 
     silent s/>/\&gt;/eg 
 endfunction 
-
 function! HtmlUnEscape() 
     silent s/&lt;/</eg 
     silent s/&gt;/>/eg 
