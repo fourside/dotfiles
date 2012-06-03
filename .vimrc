@@ -1,13 +1,13 @@
 "================================================================================
-set nocompatible	"vim
+set nocompatible    "vim
 call pathogen#runtime_append_all_bundles()
 "================================================================================
 " パス
 " .swpファイルの場所
 if has('win32')
-	set directory=$HOME/tmp
-else	
-	set directory=/tmp
+    set directory=$HOME/tmp
+else    
+    set directory=/tmp
 endif
 set tags=$HOME/.tags,./.tags
 
@@ -18,14 +18,14 @@ augroup END
 "================================================================================
 " 表示
 set number
-set showmatch	"対括弧の強調
-set title		"編集中ファイル名の表示
-set incsearch	"インクリメンタルサーチ
+set showmatch   "対括弧の強調
+set title       "編集中ファイル名の表示
+set incsearch   "インクリメンタルサーチ
 set ignorecase
-set smartcase	"検索文字にひとつでも大文字があればイグノアしない
-set showcmd		"コマンドをステータス行に表示
-set list		"不可視文字表示
-set display=uhex	"印刷不可の文字を16進表示
+set smartcase   "検索文字にひとつでも大文字があればイグノアしない
+set showcmd     "コマンドをステータス行に表示
+set list        "不可視文字表示
+set display=uhex    "印刷不可の文字を16進表示
 " 検索時に最後まで行ったら最初に戻る
 set wrapscan
 " タブの左側にカーソル表示
@@ -48,22 +48,22 @@ setlocal encoding=utf-8
 setlocal fileencoding=utf-8
 
 syntax on
-filetype plugin on		"オムニ補完
+filetype plugin on      "オムニ補完
 
 " rails
 augroup My
-	au BufNewFile,BufRead app/**/*.rhtml set fenc=utf-8
-	au BufNewFile,BufRead app/**/*.rb set fenc=utf-8
-	autocmd BufWrite,BufNewFile *_spec.rb set filetype=ruby.rspec
-	autocmd BufWrite,BufNewFile test_*.rb set filetype=ruby.test
+    au BufNewFile,BufRead app/**/*.rhtml set fenc=utf-8
+    au BufNewFile,BufRead app/**/*.rb set fenc=utf-8
+    autocmd BufWrite,BufNewFile *_spec.rb set filetype=ruby.rspec
+    autocmd BufWrite,BufNewFile test_*.rb set filetype=ruby.test
 augroup END
 
-set ruler	"ルーラー表示
-set showmode	"モード表示
-set scrolloff=5	"スクロール時の余白確保
+set ruler   "ルーラー表示
+set showmode    "モード表示
+set scrolloff=5 "スクロール時の余白確保
 set history=50
 
-let g:mapleader=","	"<Leader>
+let g:mapleader="," "<Leader>
 " 表示をツリー状に
 let g:netrw_liststyle=3
 
@@ -80,11 +80,11 @@ set shiftwidth=4
 " tabキー押下時に挿入される幅
 " 0のとき、tabstopの分だけ挿入される
 set softtabstop=0
-set expandtab	"タブをスペースに変換
+set expandtab   "タブをスペースに変換
 " rubyはタブ幅2
 augroup My
-	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=0
-	autocmd FileType ruby nnoremap i# coding : utf-8<Esc>
+    autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=0
+    autocmd FileType ruby nnoremap i# coding : utf-8<Esc>
 augroup END
 
 " share clipboard with other applications
@@ -182,10 +182,10 @@ nnoremap <Leader>s :<C-u>source $MYVIMRC<CR>
 "nnoremap mx :execute '!' &ft ' %'<CR>
 " perl/rubyの構文チェックと実行
 augroup My
-	autocmd FileType perl :nnoremap <C-n> <ESC>:!perl -cw %<CR>
-	autocmd FileType ruby :nnoremap <C-n> <ESC>:!ruby -cW %<CR>
-	autocmd FileType php  :nnoremap <C-n> <ESC>:!php  -l  %<CR>
-	autocmd FileType ruby :nnoremap <C-m> <ESC>:!ruby -Ku %<CR>
+    autocmd FileType perl :nnoremap <C-n> <ESC>:!perl -cw %<CR>
+    autocmd FileType ruby :nnoremap <C-n> <ESC>:!ruby -cW %<CR>
+    autocmd FileType php  :nnoremap <C-n> <ESC>:!php  -l  %<CR>
+    autocmd FileType ruby :nnoremap <C-m> <ESC>:!ruby -Ku %<CR>
 augroup END
 
 " yeでそのカーソル位置にある単語をレジスタに追加
@@ -205,7 +205,7 @@ nnoremap <Space>h :<C-u>execute "h" expand("<cword>")<CR>
 " quickfixを自動で開く
 " http://webtech-walker.com/archive/2009/09/29213156.html
 augroup My
-	autocmd QuickFixCmdPost make,grep,grepadd,vimgrep if len(getqflist()) != 0 | copen | endif
+    autocmd QuickFixCmdPost make,grep,grepadd,vimgrep if len(getqflist()) != 0 | copen | endif
 augroup END
 
 "================================================================================
@@ -213,18 +213,18 @@ augroup END
 
 " closetag.vimの自動読み込み / C-_で閉じタグ挿入
 augroup My
-	autocmd FileType html,xhtml,xml,xsl,jsp,erb source $HOME/.vim/macros/closetag.vim
+    autocmd FileType html,xhtml,xml,xsl,jsp,erb source $HOME/.vim/macros/closetag.vim
 augroup END
 
 " CD.vim example:// は適用しない
 " bufferの場所にカレントディレクトリを合わせる
 augroup My
-	autocmd BufEnter * 
-	\ if bufname("") =~ "\.git/COMMIT_EDITMSG$" | 
-	\ 	|
-	\ elseif bufname("") !~ "^\[A-Za-z0-9\]*://" |
-	\ 	lcd %:p:h |
-	\ endif
+    autocmd BufEnter * 
+    \ if bufname("") =~ "\.git/COMMIT_EDITMSG$" | 
+    \   |
+    \ elseif bufname("") !~ "^\[A-Za-z0-9\]*://" |
+    \   lcd %:p:h |
+    \ endif
 augroup END
 
 " zencoding.vim
@@ -250,7 +250,7 @@ nnoremap <silent> ff :FufFile!<CR>
 nnoremap <silent> gb :FufFile **/<CR>
 nnoremap <silent> mf :FufMruFile!<CR>
 augroup My
-	autocmd FileType fuf nmap <C-c> <ESC>
+    autocmd FileType fuf nmap <C-c> <ESC>
 augroup END
 let g:fuf_splitPathMatching = ' '
 let g:fuf_patternSeparator = ' '
@@ -318,11 +318,11 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplcache_dictionary_filetype_lists = {
-	\ 'default' : ''}
+    \ 'default' : ''}
 
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
-	let g:neocomplcache_keyword_patterns = {}
+    let g:neocomplcache_keyword_patterns = {}
 endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
@@ -337,39 +337,39 @@ source $HOME/.gist.vim
 
 " html escape function
 :function! HtmlEscape() 
-	silent s/&/\&amp;/eg 
-	silent s/</\&lt;/eg 
-	silent s/>/\&gt;/eg 
+    silent s/&/\&amp;/eg 
+    silent s/</\&lt;/eg 
+    silent s/>/\&gt;/eg 
 :endfunction 
 
 :function! HtmlUnEscape() 
-	silent s/&lt;/</eg 
-	silent s/&gt;/>/eg 
-	silent s/&amp;/\&/eg 
+    silent s/&lt;/</eg 
+    silent s/&gt;/>/eg 
+    silent s/&amp;/\&/eg 
 :endfunction 
 
 
 " Open junk file."{{{
 command! -nargs=0 JunkFile call s:open_junk_file()
 function! s:open_junk_file()
-	let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
-	if !isdirectory(l:junk_dir)
-		call mkdir(l:junk_dir, 'p')
-	endif
+    let l:junk_dir = $HOME . '/.vim_junk'. strftime('/%Y/%m')
+    if !isdirectory(l:junk_dir)
+        call mkdir(l:junk_dir, 'p')
+    endif
 
-	let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
-	if l:filename != ''
-		execute 'edit ' . l:filename
-	endif
+    let l:filename = input('Junk Code: ', l:junk_dir.strftime('/%Y-%m-%d-%H%M%S.'))
+    if l:filename != ''
+        execute 'edit ' . l:filename
+    endif
 endfunction"}}}
 
 function! RTrim()
-	let s:cursor = getpos(".")
-	%s/\s\+$//e
-	call setpos(".", s:cursor)
+    let s:cursor = getpos(".")
+    %s/\s\+$//e
+    call setpos(".", s:cursor)
 endfunction
 augroup My
-	autocmd BufWritePre *.php,*.rb,*.js,*.bat call RTrim()
+    autocmd BufWritePre *.php,*.rb,*.js,*.bat call RTrim()
 augroup END
 "================================================================================
 " 文字コード
@@ -428,19 +428,19 @@ endif
 
 " 前回のカーソル位置を記憶"
 if has("autocmd")
-	augroup My
-		autocmd BufReadPost *
-		\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-		\   exe "normal! g'\"" |
-		\ endif
-	augroup END	
+    augroup My
+        autocmd BufReadPost *
+        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+        \   exe "normal! g'\"" |
+        \ endif
+    augroup END 
 endif
 
 " nyacusをシェルに設定
 if has('win32')
-	set shell=$HOME/tools/nyacus/nyacus.exe
-	set shellcmdflag=-e		" 非対話モード
-	set shellpipe=\|\ tee
-	set shellredir=>\s\ 2>&1
-	set shellxquote=\"
+    set shell=$HOME/tools/nyacus/nyacus.exe
+    set shellcmdflag=-e     " 非対話モード
+    set shellpipe=\|\ tee
+    set shellredir=>\s\ 2>&1
+    set shellxquote=\"
 endif
