@@ -165,6 +165,12 @@ vnoremap ( "zdi^V{<C-R>z}<ESC>
 vnoremap " "zdi^V{<C-R>z}<ESC>
 vnoremap ' "zdi^V{<C-R>z}<ESC>
 
+" 現在のカーソル位置から次の閉じ括弧まで
+onoremap ) t)
+onoremap ( t(
+vnoremap ) t)
+vnoremap ( t(
+
 " append line of =/-
 nnoremap ,= 80i=<ESC>
 nnoremap ,- 80i-<ESC>
