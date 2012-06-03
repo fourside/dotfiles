@@ -9,7 +9,7 @@ if has('win32')
 else	
 	set directory=/tmp
 endif
-set tags+=$HOME/.tags
+set tags=$HOME/.tags,./.tags
 
 " autocmd初期化
 augroup My
@@ -30,14 +30,11 @@ set display=uhex	"印刷不可の文字を16進表示
 set wrapscan
 " タブの左側にカーソル表示
 "set listchars=tab:\\ 
-set nolist
+
 " 検索結果文字列のハイライトを有効にしない
 set nohlsearch
-
-
 set t_Co=256
-"colorscheme ap_dark8
-"colorscheme default
+
 colorscheme wombat256mod
 
 " ステータスラインを常に表示
@@ -83,7 +80,7 @@ set shiftwidth=4
 " tabキー押下時に挿入される幅
 " 0のとき、tabstopの分だけ挿入される
 set softtabstop=0
-set noexpandtab	"タブをスペースに変換しない
+set expandtab	"タブをスペースに変換
 " rubyはタブ幅2
 augroup My
 	autocmd FileType ruby setlocal tabstop=2 shiftwidth=2 softtabstop=0
@@ -297,14 +294,11 @@ nnoremap <Space>gL :<C-u>GitLog -u \| head -10000<Enter>
 nnoremap <Space>gp :<C-u>Git push
 nnoremap <Space>gu :<C-u>Git unstage
 
-" quickrun
-"augroup My
-	"autocmd BufWrite,BufNewFile *_spec.rb set filetype=ruby.rspec
-	"autocmd BufWrite,BufNewFile test_*.rb set filetype=ruby.test
-"augroup END
+
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.test'] = {'command': "rake"}
-let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
+let g:quickrun_config['ruby.rspec'] = {'command': "rspec", 'cmdopt': '-fs --color'}
+let g:quickrun_config['markdown'] = {'command': "bluecloth", 'exec': '%c %s'}
 ""================================================================================
 " neocomplcache.vim
 " 
@@ -336,6 +330,8 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 imap <C-g> <Plug>(neocomplcache_snippets_expand)
 smap <C-g> <Plug>(neocomplcache_snippets_expand)
 
+" gist.vim
+source $HOME/.gist.vim
 ""================================================================================
 " functions
 
@@ -448,4 +444,3 @@ if has('win32')
 	set shellredir=>\s\ 2>&1
 	set shellxquote=\"
 endif
-
