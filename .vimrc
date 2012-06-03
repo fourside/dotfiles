@@ -15,6 +15,7 @@ if has('vim_starting')
         source $HOME/dotfiles/.neobundle.vimrc
     end
 endif
+filetype plugin indent on     " required!
 "================================================================================
 " パス
 " .swpファイルの場所
