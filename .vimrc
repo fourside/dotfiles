@@ -406,3 +406,36 @@ if has("autocmd")
         \ endif
     augroup END 
 endif
+
+" 日毎のメモ作成
+function! s:OpenTodayLog()
+    let l:dir =  expand('~/log')
+    if !isdirectory(l:dir)
+        call mkdir(l:dir)
+    endif
+    execute ':edit ' . l:dir . '/' . strftime('%Y%m%d') . '.txt'
+endfunction
+nnoremap <silent> <Leader>l :call <SID>OpenTodayLog()<CR>
+
+" タスクのマークトグル
+function! s:ToggleDone()
+    let l:line = getline('.')
+    if l:line =~ ' \+=> done$'
+        call setline('.', substitute(l:line, ' \+=> done$', '', ''))
+    else
+        execute "normal A\<C-i>=> done"
+    endif
+endfunction
+nnoremap <silent> <Leader><S-d> :call <SID>ToggleDone()<CR>
+
+" mysql csv dumpファイルをオートインクリメントする
+function! s:Increment() range
+    let l:num = 1
+    for n in range(a:firstline, a:lastline)
+        if getline(n) =~ '^\\N'
+            call setline(n, substitute(getline(n), '^\\N', l:num, ''))
+            let l:num += 1
+        endif
+    endfor
+endfunction
+nnoremap <silent> <Leader>i :%call <SID>Increment()<CR>
