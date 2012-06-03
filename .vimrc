@@ -228,9 +228,7 @@ augroup END
 " bufferの場所にカレントディレクトリを合わせる
 augroup My
     autocmd BufEnter * 
-    \ if bufname("") =~ "\.git/COMMIT_EDITMSG$" | 
-    \   |
-    \ elseif bufname("") !~ "^\[A-Za-z0-9\]*://" |
+    \ if bufname("") !~? "^\.git/COMMIT_EDITMSG$" && bufname("") !~? "^\[A-Za-z0-9\]*://" |
     \   lcd %:p:h |
     \ endif
 augroup END
