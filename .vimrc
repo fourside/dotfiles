@@ -1,6 +1,20 @@
 "================================================================================
 set nocompatible    "vim
-call pathogen#runtime_append_all_bundles()
+
+" neobundle
+filetype off                   " required!
+filetype plugin indent off     " required!
+if has('vim_starting')
+    if has('win32')
+        set runtimepath+=$HOME/vimfiles/bundle/neobundle.vim/
+        call neobundle#rc(expand('~/vimfiles/bundle/'))
+        source $VIM/.neobundle.vimrc
+    else
+        set runtimepath+=$HOME/.vim/bundle/neobundle.vim/
+        call neobundle#rc(expand('~/.vim/bundle/'))
+        source $HOME/dotfiles/.neobundle.vimrc
+    end
+endif
 "================================================================================
 " パス
 " .swpファイルの場所
@@ -139,7 +153,7 @@ cmap <Esc>f <S-Right>
 nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>
 nnoremap <C-j> <C-^>
-" bufferdelete, update
+
 nnoremap bd :bd<CR>
 nnoremap <S-b><S-d> :bd!<CR>
 " :ls
@@ -279,21 +293,15 @@ nmap <Leader>A :<C-u>Ref alc
 let g:ref_refe_cmd = 'refe2'
 nmap <Leader>R :<C-u>Ref refe 
 "}}}
-" git-vim {{{
-let g:git_no_map_default = 1
-let g:git_command_edit = 'rightbelow vnew'
-nnoremap <Space>ga :<C-u>GitAdd<Enter>
-nnoremap <Space>gA :<C-u>GitAdd <cfile><Enter>
-nnoremap <Space>gc :<C-u>GitCommit -v<Enter>
-nnoremap <Space>gC :<C-u>GitCommit --amend<Enter>
-nnoremap <Space>gd :<C-u>GitDiff --cached<Enter>
-nnoremap <Space>gD :<C-u>GitDiff<Enter>
-nnoremap <Space>gs :<C-u>GitStatus<Enter>
-nnoremap <Space>gl :<C-u>GitLog<Enter>
-nnoremap <Space>gL :<C-u>GitLog -u \| head -10000<Enter>
-nnoremap <Space>gp :<C-u>Git push
-nnoremap <Space>gu :<C-u>Git unstage
-"}}}
+" for fugitive {{{
+nnoremap <Space>gd :<C-u>Gdiff<Enter>
+nnoremap <Space>gs :<C-u>Gstatus<Enter>
+nnoremap <Space>gl :<C-u>Glog<Enter>
+nnoremap <Space>ga :<C-u>Gwrite<Enter>
+nnoremap <Space>gc :<C-u>Gcommit -v<Enter>
+nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
+nnoremap <Space>gb :<C-u>Gblame<Enter>
+" }}}
 " quickrun {{{
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.test'] = {'command': "rake"}
@@ -327,8 +335,59 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 imap <C-g> <Plug>(neocomplcache_snippets_expand)
 smap <C-g> <Plug>(neocomplcache_snippets_expand)
 "}}}
+" open-browser.vim {{{
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+"}}}
+" errormarker {{{
+let g:errormarker_errortext   = '!!'
+let g:errormarker_warningtext = '??'
+let g:errormarker_errorgroup  = 'my_error'
+let g:errormarker_warninggroup= 'my_warning'
+highlight my_error guifg=#FFFFFF guibg=#FF1100
+highlight my_warning guifg=#000000 guibg=#FAFF11
+"}}}
 " gist.vim {{{
 source $HOME/.gist.vim
+let g:gist_detect_filetype = 1
+"}}}
+" MRU.vim {{{
+cnoreabbrev m MRU<CR>
+"}}}
+" alice.vim{{{
+function! s:URLEncode()
+    let l:line = getline('.')
+    let l:encoded = AL_urlencode(l:line)
+    call setline('.', l:encoded)
+endfunction
+function! s:URLDecode()
+    let l:line = getline('.')
+    let l:decoded = AL_urldecode(l:line)
+    call setline('.', l:decoded)
+endfunction
+command! -nargs=0 -range URLEncode :<line1>,<line2>call <SID>URLEncode()
+command! -nargs=0 -range URLDecode :<line1>,<line2>call <SID>URLDecode()
+"}}}
+" vim-funlib {{{
+function! Random(a, b)
+    return random#randint(a:a, a:b)
+endfunction
+function! Base64encode(data)
+    return base64#b64encode(a:data)
+endfunction
+function! Base64decode(data)
+    return base64#b64decode(a:data)
+endfunction
+function! MD5(data)
+    return hashlib#md5(a:data)
+endfunction
+function! Sha1(data)
+    return hashlib#sha1(a:data)
+endfunction
+function! Sha256(data)
+    return hashlib#sha256(a:data)
+endfunction
 "}}}
 ""================================================================================
 " functions
