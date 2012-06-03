@@ -180,6 +180,9 @@ augroup My
     autocmd BufWritePost <buffer> silent source %
 augroup END
 
+" todoファイル開く
+nnoremap <silent> <Leader>t :<C-u>e $HOME/todo<CR>
+
 ",e でそのコマンドを実行
 "nnoremap mx :execute '!' &ft ' %'<CR>
 
