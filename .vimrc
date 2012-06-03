@@ -4,11 +4,8 @@ call pathogen#runtime_append_all_bundles()
 "================================================================================
 " パス
 " .swpファイルの場所
-if has('win32')
-    set directory=$HOME/tmp
-else    
-    set directory=/tmp
-endif
+set directory=$HOME/tmp
+set backupdir=$HOME/tmp
 set tags=$HOME/.tags,./.tags
 
 " autocmd初期化
