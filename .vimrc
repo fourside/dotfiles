@@ -508,3 +508,13 @@ function! s:Increment() range
     endfor
 endfunction
 nnoremap <silent> <Leader>i :%call <SID>Increment()<CR>
+
+" shell変更 
+if has('win32')
+    let $CONSOLE = expand('~/tools/Console2/Console.exe')
+    set shell=$CONSOLE
+    set shellcmdflag=-e     " 非対話モード
+    set shellpipe=\|\ tee
+    set shellredir=>\s\ 2>&1
+    set shellxquote=\"
+endif
