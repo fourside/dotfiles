@@ -184,6 +184,9 @@ noremap <ESC><ESC> :<C-u>set nohlsearch!<CR>
 nnoremap <Leader>e :<C-u>edit $MYVIMRC<CR>
 " .vimrcの読み込み
 nnoremap <Leader>s :<C-u>source $MYVIMRC<CR>
+augroup My
+    autocmd BufWritePost <buffer> silent source %
+augroup END
 
 ",e でそのコマンドを実行
 "nnoremap mx :execute '!' &ft ' %'<CR>
