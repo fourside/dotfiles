@@ -41,7 +41,6 @@ NeoBundle 'mru.vim'
 "NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
 "NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 
-filetype plugin indent on     " required!
 "
 " Brief help
 " :NeoBundleList          - list configured bundles
