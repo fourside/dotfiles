@@ -186,14 +186,6 @@ augroup END
 " sudo で保存する
 cnoreabbrev sudow w !sudo tee %
 
-" perl/rubyの構文チェックと実行
-augroup My
-    autocmd FileType perl :nnoremap <C-n> <ESC>:!perl -cw %<CR>
-    autocmd FileType ruby :nnoremap <C-n> <ESC>:!ruby -cW %<CR>
-    autocmd FileType php  :nnoremap <C-n> <ESC>:!php  -l  %<CR>
-    autocmd FileType ruby :nnoremap <C-m> <ESC>:!ruby -Ku %<CR>
-augroup END
-
 " yeでそのカーソル位置にある単語をレジスタに追加
 nmap ye :let @"=expand("<cword>")<CR>
 
@@ -238,6 +230,15 @@ augroup My
     endif
 " htmlをブラウザで開く
     autocmd FileType html,xhtml nnoremap <Leader>W :silent ! start firefox %<CR>
+augroup END
+
+augroup My
+" 構文チェック
+    autocmd FileType ruby silent compiler ruby | setlocal makeprg=ruby\ -cw\ %
+    autocmd FileType php  silent compiler php  | setlocal makeprg=php\ -l\ %
+    autocmd FileType php setlocal errorformat=%-E,%m\ in\ %f\ on\ line\ %l,%ZErrors\ parsing\ %f
+    autocmd BufWritePost *.php,*.rb silent make
+    autocmd QuickFixCmdPost make cw 3
 augroup END
 
 "================================================================================
