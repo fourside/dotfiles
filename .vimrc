@@ -190,6 +190,10 @@ augroup END
 
 ",e でそのコマンドを実行
 "nnoremap mx :execute '!' &ft ' %'<CR>
+
+" sudo で保存する
+cnoreabbrev sudow w !sudo tee %
+
 " perl/rubyの構文チェックと実行
 augroup My
     autocmd FileType perl :nnoremap <C-n> <ESC>:!perl -cw %<CR>
