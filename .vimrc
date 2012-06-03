@@ -256,11 +256,12 @@ let NERDShutUp=1
 "}}}
 " smartchr.vim 
 "inoremap <expr> = smartchr#one_of(' = ', ' == ', ' === ', '=')
+inoremap <expr> { smartchr#loop('{', '#{', '{{{')
 inoremap <expr> & smartchr#one_of('&', ' & ', ' && ')
 "inoremap <expr> | smartchr#one_of('|', ' | ', ' || ')
 inoremap <expr> , smartchr#one_of(', ', ',')
 inoremap <expr> ? smartchr#one_of('?', '? ')
-inoremap <expr> { smartchr#loop('{', '#{', '{{{')
+" }}}
 " ref.vim {{{
 let g:ref_open = 'split'
 "let g:ref_cache_dir  =  s:plugin_info . 'ref'
