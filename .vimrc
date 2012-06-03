@@ -32,7 +32,6 @@ set display=uhex    "印刷不可の文字を16進表示
 set wrapscan
 " タブの左側にカーソル表示
 "set listchars=tab:\\ 
-
 " 検索結果文字列のハイライトを有効にしない
 set nohlsearch
 set t_Co=256
@@ -133,7 +132,7 @@ imap <C-j> <Down>
 imap <C-k> <Up>
 
 imap <C-a> <HOME>
-imap <C-e> <END>
+"imap <C-e> <END>
 imap <C-f> <Right>
 imap <C-b> <Left>
 
