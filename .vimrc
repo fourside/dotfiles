@@ -117,7 +117,8 @@ nnoremap k gk
 
 " insertmodeでのカーソル移動
 imap <C-l> <Right>
-"imap <M-h> <Left>
+imap <C-f> <Right>
+imap <C-b> <Left>
 imap <C-j> <Down>
 imap <C-k> <Up>
 
@@ -137,9 +138,10 @@ cmap <Esc>f <S-Right>
 " buffer移動
 nnoremap <C-l> :bn<CR>
 nnoremap <C-h> :bp<CR>
+nnoremap <C-j> <C-^>
 " bufferdelete, update
 nnoremap bd :bd<CR>
-"nnoremap up :up<CR>
+nnoremap <S-b><S-d> :bd!<CR>
 " :ls
 nnoremap <C-d> :ls<CR>
 
