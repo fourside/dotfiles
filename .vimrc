@@ -8,6 +8,11 @@ set directory=$HOME/tmp
 set backupdir=$HOME/tmp
 set tags=$HOME/.tags,./.tags
 
+if has('persistent_undo')
+    set undodir=$HOME/.vimundo
+    set undofile
+endif
+
 " autocmd初期化
 augroup My
 au!
