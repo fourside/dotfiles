@@ -3,17 +3,17 @@ alias sr='screen -r'
 alias sx='screen -x'
 alias diff='diff -u'
 
-alias ls='ls --color=auto'
-alias ll='ls -l --color=auto'
-alias l.='ls -a --color=auto'
-alias ll.='ls -al --color=auto'
+alias ls='ls --color=auto --show-control-char'
+alias ll='ls -l --color=auto --show-control-char'
+alias l.='ls -a --color=auto --show-control-char'
+alias ll.='ls -al --color=auto --show-control-char'
 
 alias -g G='|grep '
 alias -g L='|less '
 alias -g T='|tee tee.log |less'
 alias -g W='|wc'
 alias -g V='| vim -'
-alias rm='mv -f --backup=numbered --target-directory=~/.Trash'
+#alias rm='mv -f --backup=numbered --target-directory=~/.Trash'
 
 export EDITOR='vim'
 export PAGER='less'
@@ -194,3 +194,58 @@ bindkey " "   magic-abbrev-expand-and-insert
 bindkey "."   magic-abbrev-expand-and-insert
 bindkey "^x " no-magic-abbrev-expand
 RPROMPT+="%1(v|%F{green}%1v%f|)"
+
+
+# history
+function peco-select-history() {
+  typeset tac
+  if which tac > /dev/null; then
+    tac=tac
+  else
+    tac='tail -r'
+  fi
+  BUFFER=$(fc -l -n 1 | eval $tac | peco --query "$LBUFFER")
+  CURSOR=$#BUFFER
+  zle -R -c
+}
+zle -N peco-select-history
+bindkey '^r' peco-select-history
+
+
+# process kill
+function peco-pkill() {
+  for pid in `ps aux | peco | awk '{ print $2 }'`
+  do
+    kill $pid
+    echo "Killed ${pid}"
+  done
+}
+alias pk="peco-pkill"
+
+
+
+function peco-cdr () {
+    local selected_dir=$(cdr -l | awk '{ print $2 }' | peco)
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+zle -N peco-cdr
+
+bindkey '^y' peco-cdr
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*:descriptions' format '%BCompleting%b %U%d%u'
+
+typeset -ga chpwd_functions
+
+if is-at-least 4.3.11; then
+  autoload -U chpwd_recent_dirs cdr
+  chpwd_functions+=chpwd_recent_dirs
+  zstyle ":chpwd:*" recent-dirs-max 500
+  zstyle ":chpwd:*" recent-dirs-default true
+  zstyle ":completion:*" recent-dirs-insert always
+fi
